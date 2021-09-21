@@ -1,10 +1,6 @@
 from prettytable import PrettyTable, DOUBLE_BORDER
 import parser
 
-import parser
-from math import sin
-
-
 def isNegative(number):
     if number < 0:
         return True
