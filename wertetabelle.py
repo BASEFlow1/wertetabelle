@@ -1,8 +1,9 @@
 from prettytable import PrettyTable, DOUBLE_BORDER
+import parser
 
-header = ["x"]
-rangeA, rangeB = -20, 0
-ausgerechneterWerte = ["f(x)=x^2"]
+import parser
+from math import sin
+
 
 def isNegative(number):
     if number < 0:
@@ -10,13 +11,21 @@ def isNegative(number):
     else:
         return False
 
-print("                 Wertetabellenrechner")
+print("Wertetabellenrechner\n---------------------")
+formel = input("Formel {f(x) = ...}:")
+formelFalsch = formel
+formel = formel.replace("^", " ** ")
+formel = formel.replace("f(x)=", "")
+formel = formel.replace(" ", "")
+code = parser.expr(formel).compile()
 rangeA = int(input("von: "))
 rangeB = int(input("bis einschleißlich: "))
 
+header = ["x"]
+ausgerechneterWerte = [formelFalsch]
+
 for x in range(rangeA, rangeB + 1):
-    ausgerechneterWerte.append(x ** 2)
-    print(x ** 2)
+    ausgerechneterWerte.append(eval(code))
 
 for wert in range(rangeA, rangeB + 1):
     header.append(wert)
